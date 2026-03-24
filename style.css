@@ -140,4 +140,40 @@ button {
   display: block;
   margin: 30px auto 0;
   transition: background-color 0.2s;
+}/* Difficulty buttons layout */
+.difficulty {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
 }
+
+.difficulty button {
+  margin: 0;
+}
+
+/* Achievement message */
+.achievement {
+  text-align: center;
+  font-weight: bold;
+  color: #159A48;
+  margin-bottom: 15px;
+  min-height: 24px;
+}
+
+/* Footer links */
+.footer-links {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.footer-links a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #2E9DF7;
+  font-weight: bold;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+} 
