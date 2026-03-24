@@ -134,7 +134,7 @@ function startGame() {
     startButton.style.display = 'none';
   }
 
-  const difficultyButtons = document.querySelector('.difficulty-buttons');
+  const difficultyButtons = document.querySelector('.difficulty');
   if (difficultyButtons) {
     difficultyButtons.style.display = 'none';
   }
@@ -167,7 +167,7 @@ function endGame() {
     startButton.style.display = 'inline-block';
   }
 
-  const difficultyButtons = document.querySelector('.difficulty-buttons');
+  const difficultyButtons = document.querySelector('.difficulty');
   if (difficultyButtons) {
     difficultyButtons.style.display = 'flex';
   }
