@@ -8,6 +8,7 @@ let achievementTimeout;
 let selectedDifficulty = 'normal';
 
 const collectSound = new Audio('sounds/collect.mp3');
+collectSound.preload = 'auto';
 
 const difficultySettings = {
   easy: { time: 40, goal: 15, speed: 1700 },
@@ -87,7 +88,9 @@ function spawnWaterCan() {
     updateScore();
 
     collectSound.currentTime = 0;
-    collectSound.play();
+    collectSound.play().catch(error => {
+      console.log('Sound could not play:', error);
+    });
 
     wrapper.remove();
 
@@ -126,6 +129,16 @@ function startGame() {
     achievementBox.textContent = '';
   }
 
+  const startButton = document.getElementById('start-game');
+  if (startButton) {
+    startButton.style.display = 'none';
+  }
+
+  const difficultyButtons = document.querySelector('.difficulty-buttons');
+  if (difficultyButtons) {
+    difficultyButtons.style.display = 'none';
+  }
+
   createGrid();
   spawnWaterCan();
 
@@ -148,6 +161,16 @@ function endGame() {
   gameActive = false;
   clearInterval(spawnInterval);
   clearInterval(timerInterval);
+
+  const startButton = document.getElementById('start-game');
+  if (startButton) {
+    startButton.style.display = 'inline-block';
+  }
+
+  const difficultyButtons = document.querySelector('.difficulty-buttons');
+  if (difficultyButtons) {
+    difficultyButtons.style.display = 'flex';
+  }
 }
 
 createGrid();
