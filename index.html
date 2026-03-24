@@ -10,7 +10,17 @@
 <body>
   <div class="container">
     <h1>Water Quest</h1>
-    <p class="game-instructions">Collect 20 items to complete the game!</p>
+
+    <p class="game-instructions">
+      Choose a difficulty and collect water cans before time runs out!
+    </p>
+
+    <!-- ✅ NEW: DIFFICULTY BUTTONS -->
+    <div class="difficulty">
+      <button onclick="setDifficulty('easy')">Easy</button>
+      <button onclick="setDifficulty('normal')">Normal</button>
+      <button onclick="setDifficulty('hard')">Hard</button>
+    </div>
 
     <div class="stats">
       <p>Cans Collected: <span id="current-cans">0</span></p>
@@ -21,22 +31,7 @@
 
     <div class="game-grid"></div>
 
-    <!-- 🔥 NEW: Difficulty Buttons -->
-    <div class="difficulty">
-      <button onclick="setDifficulty('easy')">Easy</button>
-      <button onclick="setDifficulty('normal')">Normal</button>
-      <button onclick="setDifficulty('hard')">Hard</button>
-    </div>
-
     <button id="start-game">Start Game</button>
-
-    <!-- ⭐ OPTIONAL (but good for assignment requirement) -->
-    <footer>
-      <p>
-        <a href="https://www.charitywater.org" target="_blank">Learn More</a> |
-        <a href="https://www.charitywater.org/donate" target="_blank">Donate</a>
-      </p>
-    </footer>
   </div>
 
   <script src="script.js"></script>
