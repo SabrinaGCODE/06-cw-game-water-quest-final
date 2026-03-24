@@ -1,10 +1,19 @@
-const GOAL_CANS = 20;
+let goalCans = 20;
 let currentCans = 0;
 let gameActive = false;
 let spawnInterval;
 let timeLeft = 30;
 let timerInterval;
 let achievementTimeout;
+let selectedDifficulty = 'normal';
+
+const collectSound = new Audio('sounds/collect.mp3');
+
+const difficultySettings = {
+  easy: { time: 40, goal: 15, speed: 1700 },
+  normal: { time: 30, goal: 20, speed: 1500 },
+  hard: { time: 20, goal: 25, speed: 1000 }
+};
 
 function createGrid() {
   const grid = document.querySelector('.game-grid');
@@ -43,6 +52,17 @@ function showAchievement(message) {
   }, 3500);
 }
 
+function setDifficulty(level) {
+  selectedDifficulty = level;
+
+  const settings = difficultySettings[level];
+  goalCans = settings.goal;
+  timeLeft = settings.time;
+
+  updateTimer();
+  showAchievement(`Difficulty set to ${level}.`);
+}
+
 function spawnWaterCan() {
   if (!gameActive) return;
 
@@ -65,6 +85,10 @@ function spawnWaterCan() {
 
     currentCans++;
     updateScore();
+
+    collectSound.currentTime = 0;
+    collectSound.play();
+
     wrapper.remove();
 
     if (currentCans === 5) {
@@ -75,7 +99,7 @@ function spawnWaterCan() {
       showAchievement('Almost there! 15 cans collected.');
     }
 
-    if (currentCans >= GOAL_CANS) {
+    if (currentCans >= goalCans) {
       endGame();
       showAchievement('You win! You collected enough water cans!');
     }
@@ -87,8 +111,11 @@ function startGame() {
   clearInterval(timerInterval);
   clearTimeout(achievementTimeout);
 
+  const settings = difficultySettings[selectedDifficulty];
+
   currentCans = 0;
-  timeLeft = 30;
+  goalCans = settings.goal;
+  timeLeft = settings.time;
   gameActive = true;
 
   updateScore();
@@ -102,7 +129,7 @@ function startGame() {
   createGrid();
   spawnWaterCan();
 
-  spawnInterval = setInterval(spawnWaterCan, 1500);
+  spawnInterval = setInterval(spawnWaterCan, settings.speed);
 
   timerInterval = setInterval(function () {
     if (!gameActive) return;
