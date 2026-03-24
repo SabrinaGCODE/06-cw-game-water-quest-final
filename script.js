@@ -68,7 +68,9 @@ function spawnWaterCan() {
   if (!gameActive) return;
 
   const cells = document.querySelectorAll('.grid-cell');
-  cells.forEach(cell => (cell.innerHTML = ''));
+  cells.forEach(cell => {
+    cell.innerHTML = '';
+  });
 
   const randomCell = cells[Math.floor(Math.random() * cells.length)];
 
@@ -77,6 +79,7 @@ function spawnWaterCan() {
 
   const can = document.createElement('div');
   can.className = 'water-can';
+  can.textContent = '💧';
 
   wrapper.appendChild(can);
   randomCell.appendChild(wrapper);
@@ -134,7 +137,7 @@ function startGame() {
     startButton.style.display = 'none';
   }
 
-  const difficultyButtons = document.querySelector('.difficulty');
+  const difficultyButtons = document.getElementById('difficulty-buttons');
   if (difficultyButtons) {
     difficultyButtons.style.display = 'none';
   }
@@ -144,7 +147,7 @@ function startGame() {
 
   spawnInterval = setInterval(spawnWaterCan, settings.speed);
 
-  timerInterval = setInterval(function () {
+  timerInterval = setInterval(() => {
     if (!gameActive) return;
 
     timeLeft--;
@@ -165,12 +168,18 @@ function endGame() {
   const startButton = document.getElementById('start-game');
   if (startButton) {
     startButton.style.display = 'inline-block';
+    startButton.textContent = 'Play Again';
   }
 
-  const difficultyButtons = document.querySelector('.difficulty');
+  const difficultyButtons = document.getElementById('difficulty-buttons');
   if (difficultyButtons) {
     difficultyButtons.style.display = 'flex';
   }
+
+  const cells = document.querySelectorAll('.grid-cell');
+  cells.forEach(cell => {
+    cell.innerHTML = '';
+  });
 }
 
 createGrid();
